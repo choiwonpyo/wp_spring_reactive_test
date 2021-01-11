@@ -1,6 +1,7 @@
 package com.example.wp_reactive_test;
 
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -20,11 +21,11 @@ public class OrderRepository {
         return Mono.justOrEmpty(order);
     }
 
-    public List<Order> findAll() {
-        return new ArrayList<>(mockTable.values());
+    public Flux<Order> findAll() {
+        return Flux.just(mockTable.values().toArray(new Order[0]));
     }
 
-    public Order findOne(int id) {
-        return mockTable.get(id);
+    public Mono<Order> findOne(int id) {
+        return Mono.just(mockTable.get(id));
     }
 }

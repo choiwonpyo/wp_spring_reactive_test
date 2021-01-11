@@ -25,10 +25,10 @@ public class OrderHandler {
     }
 
     public Mono<ServerResponse> list(ServerRequest request) {
-        return ServerResponse.ok().bodyValue(orderRepository.findAll());
+        return ServerResponse.ok().body(orderRepository.findAll(), Order.class);
     }
 
     public Mono<ServerResponse> get(ServerRequest request) {
-        return ServerResponse.ok().bodyValue(orderRepository.findOne(Integer.parseInt(request.pathVariable("id"))));
+        return ServerResponse.ok().body(orderRepository.findOne(Integer.parseInt(request.pathVariable("id"))), Order.class);
     }
 }
